@@ -4,22 +4,23 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import net.yazidi.cafee.models.Product;
+import net.yazidi.cafee.models.User;
+import net.yazidi.cafee.repository.ProductRepository;
+import net.yazidi.cafee.repository.UserRepository;
 
 @Component
 public class ProductService {
 
-	List<Product> products= Arrays.asList(
-			new Product(1,"cd",30),
-			new Product(1,"dvd",430),
-			new Product(1,"pc",4),
-			new Product(1,"printer",40)
-		);
+	
+	@Autowired
+    private ProductRepository productRepository;
 	
 	public List<Product> getProducts() {
-		
+		List<Product> products = productRepository.findAll();
 		return products;
 	}
 	

@@ -1,11 +1,16 @@
 package net.yazidi.cafee.models;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="products")
 public class Product {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String name;
 	private double price;
-	
-	
 	
 	public Product() {
 		super();

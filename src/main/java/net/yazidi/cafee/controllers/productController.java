@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.yazidi.cafee.models.Product;
+import net.yazidi.cafee.models.User;
 import net.yazidi.cafee.services.ProductService;
 
 @CrossOrigin("*")
@@ -35,8 +36,8 @@ public class productController {
 	}
 	
 	@DeleteMapping("/product/{id}")
-	public Product delete(@PathVariable String id) {
-		Product product = productService.getProductById(Long.parseLong(id));
-		return product;
+	public String delete(@PathVariable String id) {
+		boolean isDeleted = productService.deleteProductById(Long.parseLong(id));
+		return "";
 	}
 }
