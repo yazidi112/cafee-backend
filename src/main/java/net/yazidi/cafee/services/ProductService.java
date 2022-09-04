@@ -25,13 +25,24 @@ public class ProductService {
 	}
 	
 	public Product getProductById(long id) {
-		Product product = new Product(1,"printer",40);
+		Product product = productRepository.findById(id).get();
 		return product;
 	}
+	
+	public Product addProduct(Product product) {
+		return productRepository.save(product);
+	}
 
-	public boolean deleteProductById(long id) {
+	public void deleteProductById(long id) {
+		productRepository.deleteById(id);
+	}
+
+	public Product updateProduct(Long id, Product product) {
 		
-		return false;
+		Product oldProduct = productRepository.findById(id).get();
+		oldProduct.setName(product.getName());
+		oldProduct.setPrice(product.getPrice());
+		return productRepository.save(oldProduct);
 	}
 	
 	
