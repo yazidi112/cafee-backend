@@ -1,4 +1,4 @@
-package net.yazidi.cafee.models;
+package net.yazidi.cafee.entity;
 
 import javax.persistence.*;
 

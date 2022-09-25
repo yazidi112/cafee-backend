@@ -7,8 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import net.yazidi.cafee.models.Product;
-import net.yazidi.cafee.models.User;
+import net.yazidi.cafee.entity.Product;
 import net.yazidi.cafee.repository.ProductRepository;
 import net.yazidi.cafee.repository.UserRepository;
 
