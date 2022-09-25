@@ -2,6 +2,10 @@ package net.yazidi.cafee.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.yazidi.cafee.entity.Product;
@@ -25,9 +30,15 @@ public class productController {
 	private ProductService productService;
 	
 	@GetMapping("/products")
-	public List<Product> index() {
-		List<Product> products = productService.getProducts();
-		return products;
+	public Page<Product> index(
+			@RequestParam(value = "page",defaultValue="0") int page,
+			@RequestParam(value = "size", defaultValue="4")int size,
+			@RequestParam(value = "sortBy", defaultValue = "id") String sortBy,
+			@RequestParam(value = "sortDir", defaultValue="asc") String sortDir) {
+		
+		Sort sort = sortDir.equalsIgnoreCase("asc")? Sort.by(sortBy).ascending():Sort.by(sortBy).descending();
+		Pageable pageable = PageRequest.of(page, size,sort);
+		return productService.getProducts(pageable);
 	}
 	
 	@GetMapping("/product/{id}")
